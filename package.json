@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@storybook/addon-controls": "^7.0.0-rc.10",
+    "@storybook/client-api": "^7.0.0-rc.10",
     "@storybook/vue3-vite": "^7.0.0-rc.10",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
