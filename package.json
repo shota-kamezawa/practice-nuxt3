@@ -6,29 +6,17 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.3",
-    "@storybook/addon-actions": "^6.5.16",
-    "@storybook/addon-essentials": "^6.5.16",
-    "@storybook/addon-interactions": "^6.5.16",
-    "@storybook/addon-links": "^6.5.16",
-    "@storybook/builder-vite": "^0.4.2",
-    "@storybook/testing-library": "^0.0.13",
-    "@storybook/vue3": "^6.5.16",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.2",
-    "babel-loader": "^8.3.0",
     "eslint": "^8.37.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.10.0",
-    "prettier": "^2.8.7",
-    "vue-loader": "^16.8.3"
+    "prettier": "^2.8.7"
   },
   "dependencies": {
     "nuxt": "^3.3.2",
