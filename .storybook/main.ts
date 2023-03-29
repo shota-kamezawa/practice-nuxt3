@@ -5,6 +5,7 @@ import path from 'path';
 const config: StorybookConfig = {
   framework: '@storybook/vue3-vite',
   stories: ['../src/**/*.stories.@(js|ts)'],
+  addons: ['@storybook/addon-controls'],
 
   staticDirs: [{ from: '../src/public', to: '/' }],
 
