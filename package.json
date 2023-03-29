@@ -21,8 +21,10 @@
     "@storybook/vue3": "^6.5.16",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
+    "@vue/eslint-config-typescript": "^11.0.2",
     "babel-loader": "^8.3.0",
     "eslint": "^8.37.0",
+    "eslint-plugin-vue": "^9.10.0",
     "nuxt": "^3.3.2",
     "vue-loader": "^16.8.3"
   },
