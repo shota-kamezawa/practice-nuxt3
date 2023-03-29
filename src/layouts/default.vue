@@ -1,6 +1,12 @@
+<script setup>
+import { VApp } from 'vuetify/components/VApp';
+import { VMain } from 'vuetify/components/VMain';
+</script>
+
 <template>
-  <div>
-    <div>layouts/default</div>
-    <NuxtPage />
-  </div>
+  <VApp>
+    <VMain>
+      <NuxtPage />
+    </VMain>
+  </VApp>
 </template>
