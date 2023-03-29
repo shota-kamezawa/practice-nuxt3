@@ -944,7 +944,7 @@
   resolved "https://registry.yarnpkg.com/@babel/regjsgen/-/regjsgen-0.8.0.tgz#f0ba69b075e1f05fb2825b7fad991e7adbb18310"
   integrity sha512-x/rqGMdzj+fWZvCOYForTghzbtqPDZ5gPwaoNGHdgDfF2QA/XZbCBp4Moo5scrkAMPhB7z26XM/AaHuIJdgauA==
 
-"@babel/runtime@^7.8.4":
+"@babel/runtime@^7.17.8", "@babel/runtime@^7.8.4":
   version "7.21.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.21.0.tgz#5b55c9d394e5fcf304909a8b00c07dc217b56673"
   integrity sha512-xwII0//EObnq89Ji5AKYQaRYiW/nZ3llSv29d49IuxPhKbtJoLP+9QUUZ4nVragQVtaVGeZrpB+ZtG/Pdy/POw==
@@ -1011,6 +1011,11 @@
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
+
+"@emotion/use-insertion-effect-with-fallbacks@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@emotion/use-insertion-effect-with-fallbacks/-/use-insertion-effect-with-fallbacks-1.0.0.tgz#ffadaec35dbb7885bd54de3fa267ab2f860294df"
+  integrity sha512-1eEgUGmkaljiBnRMTdksDV1W4kUnmwgp7X9G8B++9GYwl1lUdqSndSriIrTJ0N7LQaoauY9JJ2yhiOYK5+NI4A==
 
 "@esbuild/android-arm64@0.17.14":
   version "0.17.14"
@@ -1235,6 +1240,11 @@
   dependencies:
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
+
+"@juggle/resize-observer@^3.3.1":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@juggle/resize-observer/-/resize-observer-3.4.0.tgz#08d6c5e20cf7e4cc02fd181c4b0c225cd31dbb60"
+  integrity sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==
 
 "@mapbox/node-pre-gyp@^1.0.5":
   version "1.0.10"
@@ -1503,6 +1513,51 @@
     estree-walker "^2.0.2"
     picomatch "^2.3.1"
 
+"@storybook/addon-controls@^7.0.0-rc.10":
+  version "7.0.0-rc.10"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-controls/-/addon-controls-7.0.0-rc.10.tgz#024bcb4043d2a84497cf301b4e5b27c987337c79"
+  integrity sha512-25lH3wRmCHtW4N9PN9v12XsCttpi8rU80ZL+qzlAvak/bmdT7xXidNi9MTZHDZxbqDeBcs8N49wbymqixvEfMQ==
+  dependencies:
+    "@storybook/blocks" "7.0.0-rc.10"
+    "@storybook/client-logger" "7.0.0-rc.10"
+    "@storybook/components" "7.0.0-rc.10"
+    "@storybook/core-common" "7.0.0-rc.10"
+    "@storybook/manager-api" "7.0.0-rc.10"
+    "@storybook/node-logger" "7.0.0-rc.10"
+    "@storybook/preview-api" "7.0.0-rc.10"
+    "@storybook/theming" "7.0.0-rc.10"
+    "@storybook/types" "7.0.0-rc.10"
+    lodash "^4.17.21"
+    ts-dedent "^2.0.0"
+
+"@storybook/blocks@7.0.0-rc.10":
+  version "7.0.0-rc.10"
+  resolved "https://registry.yarnpkg.com/@storybook/blocks/-/blocks-7.0.0-rc.10.tgz#fa4d0b56221d9da7c7ae0c6c2ad2dd7e4ca22fa8"
+  integrity sha512-E+v4EjHaSaHbFK2hiFcBW3X2Yz8+xANmioT94jr2AxvywAELMh5eOLByFwVdNK7e9umv7Qo2/icNvAzpaJdmrw==
+  dependencies:
+    "@storybook/channels" "7.0.0-rc.10"
+    "@storybook/client-logger" "7.0.0-rc.10"
+    "@storybook/components" "7.0.0-rc.10"
+    "@storybook/core-events" "7.0.0-rc.10"
+    "@storybook/csf" next
+    "@storybook/docs-tools" "7.0.0-rc.10"
+    "@storybook/global" "^5.0.0"
+    "@storybook/manager-api" "7.0.0-rc.10"
+    "@storybook/preview-api" "7.0.0-rc.10"
+    "@storybook/theming" "7.0.0-rc.10"
+    "@storybook/types" "7.0.0-rc.10"
+    "@types/lodash" "^4.14.167"
+    color-convert "^2.0.1"
+    dequal "^2.0.2"
+    lodash "^4.17.21"
+    markdown-to-jsx "^7.1.8"
+    memoizerific "^1.11.3"
+    polished "^4.2.2"
+    react-colorful "^5.1.2"
+    telejson "^7.0.3"
+    ts-dedent "^2.0.0"
+    util-deprecate "^1.0.2"
+
 "@storybook/builder-manager@7.0.0-rc.10":
   version "7.0.0-rc.10"
   resolved "https://registry.yarnpkg.com/@storybook/builder-manager/-/builder-manager-7.0.0-rc.10.tgz#7c02d712b78d745121c1a5d89842e73a44c991e8"
@@ -1648,6 +1703,20 @@
     prettier "^2.8.0"
     recast "^0.23.1"
 
+"@storybook/components@7.0.0-rc.10":
+  version "7.0.0-rc.10"
+  resolved "https://registry.yarnpkg.com/@storybook/components/-/components-7.0.0-rc.10.tgz#5a5d0dcb27981e2a436c60aad8ec139a68a2526f"
+  integrity sha512-iCJnu+cXAZ+4nz+3iObhH0LLB8PjakgvSeeG4puRQ8pYu2tTtJvEoQKjZQ1h7om6sv2sjHcnyz38Slb1CdmYQw==
+  dependencies:
+    "@storybook/client-logger" "7.0.0-rc.10"
+    "@storybook/csf" next
+    "@storybook/global" "^5.0.0"
+    "@storybook/theming" "7.0.0-rc.10"
+    "@storybook/types" "7.0.0-rc.10"
+    memoizerific "^1.11.3"
+    use-resize-observer "^9.1.0"
+    util-deprecate "^1.0.2"
+
 "@storybook/core-client@7.0.0-rc.10":
   version "7.0.0-rc.10"
   resolved "https://registry.yarnpkg.com/@storybook/core-client/-/core-client-7.0.0-rc.10.tgz#c934cb3d5eafccc61ac113b22272b6e260438e70"
@@ -1787,6 +1856,27 @@
   resolved "https://registry.yarnpkg.com/@storybook/global/-/global-5.0.0.tgz#b793d34b94f572c1d7d9e0f44fac4e0dbc9572ed"
   integrity sha512-FcOqPAXACP0I3oJ/ws6/rrPT9WGhu915Cg8D02a9YxLo0DE9zI+a9A5gRGvmQ09fiWPukqI8ZAEoQEdWUKMQdQ==
 
+"@storybook/manager-api@7.0.0-rc.10":
+  version "7.0.0-rc.10"
+  resolved "https://registry.yarnpkg.com/@storybook/manager-api/-/manager-api-7.0.0-rc.10.tgz#2260c08a719fca2bdf6373e9c795ab8574692596"
+  integrity sha512-sWMifsQKFEEnjgrmi4cuRTXaX1KfmbIDqCaBg+9A8PeqKbk/sBaapk/istUj2vXz0tTxh7P5cosoXr8K2q5IhA==
+  dependencies:
+    "@storybook/channels" "7.0.0-rc.10"
+    "@storybook/client-logger" "7.0.0-rc.10"
+    "@storybook/core-events" "7.0.0-rc.10"
+    "@storybook/csf" next
+    "@storybook/global" "^5.0.0"
+    "@storybook/router" "7.0.0-rc.10"
+    "@storybook/theming" "7.0.0-rc.10"
+    "@storybook/types" "7.0.0-rc.10"
+    dequal "^2.0.2"
+    lodash "^4.17.21"
+    memoizerific "^1.11.3"
+    semver "^7.3.7"
+    store2 "^2.14.2"
+    telejson "^7.0.3"
+    ts-dedent "^2.0.0"
+
 "@storybook/manager@7.0.0-rc.10":
   version "7.0.0-rc.10"
   resolved "https://registry.yarnpkg.com/@storybook/manager/-/manager-7.0.0-rc.10.tgz#71e3ac7434287eb051b5cffcfb5c1b28b48769a0"
@@ -1833,6 +1923,15 @@
   resolved "https://registry.yarnpkg.com/@storybook/preview/-/preview-7.0.0-rc.10.tgz#fc5d7d1e529ecb9e7380bf0b1ba3a4f343cbd729"
   integrity sha512-885uU20XL54s31lAyIu5MaiD4t23gJ0X/JEMz2/LTvfluYDtQg66gXhMibKqEPgMHcPOND5ZrGoYPdaLDG20Dw==
 
+"@storybook/router@7.0.0-rc.10":
+  version "7.0.0-rc.10"
+  resolved "https://registry.yarnpkg.com/@storybook/router/-/router-7.0.0-rc.10.tgz#90d6f05ec31b160e1981f3e53cf086f791bb0a19"
+  integrity sha512-wg8tMCPFXKf90U4Y8Gpkc347wgWlNiX+FJN2UmiTIpyFkOc+GI+9mWBqcSZDfhgQpBjmxCGgJaD/Uz03Y+vIVg==
+  dependencies:
+    "@storybook/client-logger" "7.0.0-rc.10"
+    memoizerific "^1.11.3"
+    qs "^6.10.0"
+
 "@storybook/telemetry@7.0.0-rc.10":
   version "7.0.0-rc.10"
   resolved "https://registry.yarnpkg.com/@storybook/telemetry/-/telemetry-7.0.0-rc.10.tgz#faa42064f89af223bf0c91a51f0228002053cc6f"
@@ -1847,6 +1946,16 @@
     isomorphic-unfetch "^3.1.0"
     nanoid "^3.3.1"
     read-pkg-up "^7.0.1"
+
+"@storybook/theming@7.0.0-rc.10":
+  version "7.0.0-rc.10"
+  resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-7.0.0-rc.10.tgz#d5981d8e0c5a87a761b849cccfd1c4434bae4e76"
+  integrity sha512-hzUaqmDcFJKgFfY+tec9Q06d9TTgDHBByCNIE2WxUu7U+NWZQe9kFVoEwLTSlrYU2aG6/LYhTC4oJBtQ9FSCyQ==
+  dependencies:
+    "@emotion/use-insertion-effect-with-fallbacks" "^1.0.0"
+    "@storybook/client-logger" "7.0.0-rc.10"
+    "@storybook/global" "^5.0.0"
+    memoizerific "^1.11.3"
 
 "@storybook/types@7.0.0-rc.10":
   version "7.0.0-rc.10"
@@ -2016,6 +2125,11 @@
   version "7.0.11"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.11.tgz#d421b6c527a3037f7c84433fd2c4229e016863d3"
   integrity sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==
+
+"@types/lodash@^4.14.167":
+  version "4.14.192"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.192.tgz#5790406361a2852d332d41635d927f1600811285"
+  integrity sha512-km+Vyn3BYm5ytMO13k9KTp27O75rbQ0NFw+U//g+PX7VZyjCioXaRFisqSIJRECljcTv73G3i6BpglNGHgUQ5A==
 
 "@types/mdast@^3.0.0":
   version "3.0.11"
@@ -5524,6 +5638,11 @@ map-or-similar@^1.5.0:
   resolved "https://registry.yarnpkg.com/map-or-similar/-/map-or-similar-1.5.0.tgz#6de2653174adfb5d9edc33c69d3e92a1b76faf08"
   integrity sha512-0aF7ZmVon1igznGI4VS30yugpduQW3y3GkcgGJOp7d8x8QrizhigUxjI/m2UojsXXto+jLAH3KSz+xOJTiORjg==
 
+markdown-to-jsx@^7.1.8:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/markdown-to-jsx/-/markdown-to-jsx-7.2.0.tgz#e7b46b65955f6a04d48a753acd55874a14bdda4b"
+  integrity sha512-3l4/Bigjm4bEqjCR6Xr+d4DtM1X6vvtGsMGSjJYyep8RjjIvcWtrXBS8Wbfe1/P+atKNMccpsraESIaWVplzVg==
+
 mdast-util-definitions@^5.0.0:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/mdast-util-definitions/-/mdast-util-definitions-5.1.2.tgz#9910abb60ac5d7115d6819b57ae0bcef07a3f7a7"
@@ -6329,6 +6448,13 @@ pkg-types@^1.0.2:
     mlly "^1.1.1"
     pathe "^1.1.0"
 
+polished@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/polished/-/polished-4.2.2.tgz#2529bb7c3198945373c52e34618c8fe7b1aa84d1"
+  integrity sha512-Sz2Lkdxz6F2Pgnpi9U5Ng/WdWAUZxmHrNPoVlm3aAemxoy2Qy7LGjQg4uf8qKelDAUW94F4np3iH2YPf2qefcQ==
+  dependencies:
+    "@babel/runtime" "^7.17.8"
+
 postcss-calc@^8.2.3:
   version "8.2.4"
   resolved "https://registry.yarnpkg.com/postcss-calc/-/postcss-calc-8.2.4.tgz#77b9c29bfcbe8a07ff6693dc87050828889739a5"
@@ -6871,6 +6997,11 @@ rc9@^2.0.1:
     defu "^6.1.2"
     destr "^1.2.2"
     flat "^5.0.2"
+
+react-colorful@^5.1.2:
+  version "5.6.1"
+  resolved "https://registry.yarnpkg.com/react-colorful/-/react-colorful-5.6.1.tgz#7dc2aed2d7c72fac89694e834d179e32f3da563b"
+  integrity sha512-1exovf0uGTGyq5mXQT0zgQ80uvj2PCwvF8zY1RN9/vbJVSjSo3fsB/4L3ObbF7u70NduSiK4xu4Y6q1MHoUGEw==
 
 react-dom@^18.2.0:
   version "18.2.0"
@@ -7481,6 +7612,11 @@ stdin-discarder@^0.1.0:
   dependencies:
     bl "^5.0.0"
 
+store2@^2.14.2:
+  version "2.14.2"
+  resolved "https://registry.yarnpkg.com/store2/-/store2-2.14.2.tgz#56138d200f9fe5f582ad63bc2704dbc0e4a45068"
+  integrity sha512-siT1RiqlfQnGqgT/YzXVUNsom9S0H1OX+dpdGN1xkyYATo4I6sep5NmsRD/40s3IIOvlCq6akxkqG82urIZW1w==
+
 storybook@^7.0.0-rc.10:
   version "7.0.0-rc.10"
   resolved "https://registry.yarnpkg.com/storybook/-/storybook-7.0.0-rc.10.tgz#01936f93b84b910b35efa166a4cc354aa07b9867"
@@ -8082,6 +8218,13 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+use-resize-observer@^9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/use-resize-observer/-/use-resize-observer-9.1.0.tgz#14735235cf3268569c1ea468f8a90c5789fc5c6c"
+  integrity sha512-R25VqO9Wb3asSD4eqtcxk8sJalvIOYBqS8MNZlpDSQ4l4xMQxC/J7Id9HoTqPq8FwULIn0PVW+OAqF2dyYbjow==
+  dependencies:
+    "@juggle/resize-observer" "^3.3.1"
 
 util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
