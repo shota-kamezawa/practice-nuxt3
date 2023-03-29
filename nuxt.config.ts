@@ -27,6 +27,8 @@ export default defineNuxtConfig({
 
   css: ['@/assets/styles/vuetify.scss'],
 
+  modules: ['@pinia/nuxt'],
+
   srcDir: './src',
 
   typescript: {
