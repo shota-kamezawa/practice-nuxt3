@@ -8,7 +8,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "storybook": "storybook dev --port 6006"
   },
   "devDependencies": {
     "@storybook/vue3-vite": "^7.0.0-rc.10",
