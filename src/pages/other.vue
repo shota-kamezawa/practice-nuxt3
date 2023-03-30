@@ -5,7 +5,7 @@ await new Promise((resolve) => {
 });
 
 definePageMeta({
-  layout: 'none',
+  layout: 'plain',
 });
 </script>
 
