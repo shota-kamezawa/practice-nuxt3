@@ -18,4 +18,8 @@ definePageMeta({
     <VIcon icon="mdi-magnify" start />
     Go to other
   </VBtn>
+  <VBtn to="/sample">
+    <VIcon icon="mdi-magnify" start />
+    Go to sample
+  </VBtn>
 </template>
