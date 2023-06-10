@@ -4,13 +4,13 @@ import { createVuetify } from 'vuetify';
 
 import '../src/assets/styles/vuetify.scss';
 
+const setupSymbol = Symbol();
+
 /**
  * @see https://zenn.dev/sa2knight/books/storybook-7-with-vue-3/viewer/pinia
  */
 
 setup((vueApp: App) => {
-  const setupSymbol = Symbol();
-
   if (vueApp[setupSymbol]) return;
   vueApp[setupSymbol] = setupSymbol;
 
