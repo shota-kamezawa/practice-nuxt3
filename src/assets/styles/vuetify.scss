@@ -1,1 +1,3 @@
-@use 'vuetify/styles';
+@use 'vuetify/styles' with (
+  $spacer: 4px
+);
