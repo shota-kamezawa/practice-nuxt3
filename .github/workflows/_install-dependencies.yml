@@ -1,0 +1,48 @@
+name: Install dependencies
+
+on:
+  workflow_call:
+    inputs:
+      node-env:
+        description: NODE_ENV
+        required: true
+        type: string
+    outputs:
+      node-modules-cache-key:
+        description: For 'key' of actions/cache
+        value: ${{ jobs.install-dependencies.outputs.node-modules-cache-key }}
+      node-modules-cache-path:
+        description: For 'path' of actions/cache
+        value: ${{ jobs.install-dependencies.outputs.node-modules-cache-path }}
+
+env:
+  NODE_ENV: ${{ inputs.node-env }}
+
+jobs:
+  install-dependencies:
+    runs-on: ubuntu-latest
+    outputs:
+      node-modules-cache-key: ${{ steps.node-modules-cache-key.outputs.key }}
+      node-modules-cache-path: ${{ steps.node-modules-cache-key.outputs.path }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: setup-node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: .tool-versions
+
+      - id: node-modules-cache-key
+        uses: ./.github/workflows/composite/node-modules-cache-key
+        with:
+          node-env: ${{ env.NODE_ENV }}
+          node-version: ${{ steps.setup-node.outputs.node-version }}
+
+      - uses: actions/cache@v3
+        with:
+          key: ${{ steps.node-modules-cache-key.outputs.key }}
+          path: ${{ steps.node-modules-cache-key.outputs.path }}
+          restore-keys: ${{ steps.node-modules-cache-key.outputs.restore-keys }}
+
+      - run: yarn install --frozen-lockfile
+        shell: bash

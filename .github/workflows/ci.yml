@@ -12,37 +12,14 @@ env:
 
 jobs:
   install-dependencies:
-    runs-on: ubuntu-latest
     needs: []
-    outputs:
-      node-modules-cache-key: ${{ steps.node-modules-cache-key.outputs.key }}
-      node-modules-cache-path: ${{ steps.node-modules-cache-key.outputs.path }}
-    steps:
-      - uses: actions/checkout@v3
-
-      - id: setup-node
-        uses: actions/setup-node@v3
-        with:
-          node-version-file: .tool-versions
-
-      - id: node-modules-cache-key
-        uses: ./.github/workflows/composite/node-modules-cache-key
-        with:
-          node-env: ${{ env.NODE_ENV }}
-          node-version: ${{ steps.setup-node.outputs.node-version }}
-
-      - uses: actions/cache@v3
-        with:
-          key: ${{ steps.node-modules-cache-key.outputs.key }}
-          path: ${{ steps.node-modules-cache-key.outputs.path }}
-          restore-keys: ${{ steps.node-modules-cache-key.outputs.restore-keys }}
-
-      - run: yarn install --frozen-lockfile
-        shell: bash
+    uses: ./.github/workflows/_install-dependencies.yml
+    with:
+      node-env: development
 
   eslint:
-    runs-on: ubuntu-latest
     needs: [install-dependencies]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
@@ -63,8 +40,8 @@ jobs:
         shell: bash
 
   coverage:
-    runs-on: ubuntu-latest
     needs: [install-dependencies]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
@@ -91,8 +68,8 @@ jobs:
       use-artifact: true
 
   check-built-artifact:
-    runs-on: ubuntu-latest
     needs: [build]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v3
         with:

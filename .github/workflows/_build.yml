@@ -9,17 +9,24 @@ on:
         type: boolean
     outputs:
       artifact-name:
-        description: Built artifact name
+        description: For 'name' of actions/download-articaft
         value: ${{ jobs.build.outputs.artifact-name }}
       artifact-path:
-        description: Built artifact path
+        description: For 'path' of actions/download-articaft
         value: ${{ jobs.build.outputs.artifact-path }}
 
 env:
   NODE_ENV: production
 
 jobs:
+  install-dependencies:
+    needs: []
+    uses: ./.github/workflows/_install-dependencies.yml
+    with:
+      node-env: production
+
   build:
+    needs: [install-dependencies]
     runs-on: ubuntu-latest
     outputs:
       artifact-name: ${{ steps.artifact-name.outputs.VALUE }}
@@ -32,20 +39,10 @@ jobs:
         with:
           node-version-file: .tool-versions
 
-      - id: node-modules-cache-key
-        uses: ./.github/workflows/composite/node-modules-cache-key
-        with:
-          node-env: ${{ env.NODE_ENV }}
-          node-version: ${{ steps.setup-node.outputs.node-version }}
-
       - uses: actions/cache@v3
         with:
-          key: ${{ steps.node-modules-cache-key.outputs.key }}
-          path: ${{ steps.node-modules-cache-key.outputs.path }}
-          restore-keys: ${{ steps.node-modules-cache-key.outputs.restore-keys }}
-
-      - run: yarn install --frozen-lockfile
-        shell: bash
+          key: ${{ needs.install-dependencies.outputs.node-modules-cache-key }}
+          path: ${{ needs.install-dependencies.outputs.node-modules-cache-path }}
 
       - run: yarn run build
         shell: bash
