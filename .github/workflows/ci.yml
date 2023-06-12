@@ -11,7 +11,7 @@ env:
   NODE_ENV: development
 
 jobs:
-  prepare:
+  install-dependencies:
     runs-on: ubuntu-latest
     needs: []
     outputs:
@@ -42,7 +42,7 @@ jobs:
 
   eslint:
     runs-on: ubuntu-latest
-    needs: [prepare]
+    needs: [install-dependencies]
     steps:
       - uses: actions/checkout@v3
 
@@ -53,8 +53,8 @@ jobs:
 
       - uses: actions/cache@v3
         with:
-          key: ${{ needs.prepare.outputs.node-modules-cache-key }}
-          path: ${{ needs.prepare.outputs.node-modules-cache-path }}
+          key: ${{ needs.install-dependencies.outputs.node-modules-cache-key }}
+          path: ${{ needs.install-dependencies.outputs.node-modules-cache-path }}
 
       - run: yarn run nuxt prepare
         shell: bash
@@ -64,7 +64,7 @@ jobs:
 
   coverage:
     runs-on: ubuntu-latest
-    needs: [prepare]
+    needs: [install-dependencies]
     steps:
       - uses: actions/checkout@v3
 
@@ -75,8 +75,8 @@ jobs:
 
       - uses: actions/cache@v3
         with:
-          key: ${{ needs.prepare.outputs.node-modules-cache-key }}
-          path: ${{ needs.prepare.outputs.node-modules-cache-path }}
+          key: ${{ needs.install-dependencies.outputs.node-modules-cache-key }}
+          path: ${{ needs.install-dependencies.outputs.node-modules-cache-path }}
 
       - run: yarn run nuxt prepare
         shell: bash
