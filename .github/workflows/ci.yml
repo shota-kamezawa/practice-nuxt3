@@ -87,3 +87,16 @@ jobs:
   build:
     needs: []
     uses: ./.github/workflows/_build.yml
+
+  check-built-artifact:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: ${{ needs.build.outputs.artifact-name }}
+          path: ${{ needs.build.outputs.artifact-path }}
+
+      - run: ls -a
+        shell: bash
+        working-directory: ${{ needs.build.outputs.artifact-path }}
