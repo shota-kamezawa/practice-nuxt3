@@ -37,7 +37,7 @@ jobs:
       - id: setup-node
         uses: actions/setup-node@v3
         with:
-          node-version-file: .tool-versions
+          node-version: ${{ needs.install-dependencies.outputs.node-version }}
 
       - uses: actions/cache@v3
         with:

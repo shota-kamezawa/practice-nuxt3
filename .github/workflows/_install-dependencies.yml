@@ -14,6 +14,9 @@ on:
       node-modules-cache-path:
         description: For 'path' of actions/cache
         value: ${{ jobs.install-dependencies.outputs.node-modules-cache-path }}
+      node-version:
+        description: Same as of actions/setup-node
+        value: ${{ jobs.install-dependencies.outputs.node-version }}
 
 env:
   NODE_ENV: ${{ inputs.node-env }}
@@ -22,8 +25,9 @@ jobs:
   install-dependencies:
     runs-on: ubuntu-latest
     outputs:
-      node-modules-cache-key: ${{ steps.node-modules-cache-key.outputs.key }}
-      node-modules-cache-path: ${{ steps.node-modules-cache-key.outputs.path }}
+      node-modules-cache-key: ${{ steps.cache-key.outputs.value }}
+      node-modules-cache-path: ${{ steps.cache-path.outputs.value }}
+      node-version: ${{ steps.setup-node.outputs.node-version }}
     steps:
       - uses: actions/checkout@v3
 
@@ -32,17 +36,34 @@ jobs:
         with:
           node-version-file: .tool-versions
 
-      - id: node-modules-cache-key
-        uses: ./.github/workflows/composite/node-modules-cache-key
-        with:
-          node-env: ${{ env.NODE_ENV }}
-          node-version: ${{ steps.setup-node.outputs.node-version }}
+      - id: cache-restore-key
+        name: Define restore key
+        run: |
+          NODE_MAJOR=$(echo $NODE_VERSION | cut -f 1 -d .)
+          echo "value=node-modules-${NODE_MAJOR}-${NODE_ENV}-" >> $GITHUB_OUTPUT
+        env:
+          NODE_ENV: ${{ inputs.node-env }}
+          NODE_VERSION: ${{ steps.setup-node.outputs.node-version }}
+        shell: bash
+
+      - id: cache-key
+        name: Define cache key
+        run: echo "value=${RESTORE_KEY}${IDENTIFIER}" >> $GITHUB_OUTPUT
+        env:
+          IDENTIFIER: ${{ hashFiles('yarn.lock') }}
+          RESTORE_KEY: ${{ steps.cache-restore-key.outputs.value }}
+        shell: bash
+
+      - id: cache-path
+        name: Define cache path
+        run: echo "value=node_modules" >> $GITHUB_OUTPUT
+        shell: bash
 
       - uses: actions/cache@v3
         with:
-          key: ${{ steps.node-modules-cache-key.outputs.key }}
-          path: ${{ steps.node-modules-cache-key.outputs.path }}
-          restore-keys: ${{ steps.node-modules-cache-key.outputs.restore-keys }}
+          key: ${{ steps.cache-key.outputs.value }}
+          path: ${{ steps.cache-path.outputs.value }}
+          restore-keys: ${{ steps.cache-restore-key.outputs.value }}
 
       - run: yarn install --frozen-lockfile
         shell: bash
