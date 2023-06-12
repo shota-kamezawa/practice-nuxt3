@@ -56,8 +56,10 @@ jobs:
           path: ${{ needs.prepare.outputs.node-modules-cache-path }}
 
       - run: yarn run nuxt prepare
+        shell: bash
 
       - run: yarn run lint
+        shell: bash
 
   coverage:
     runs-on: ubuntu-latest
@@ -76,5 +78,7 @@ jobs:
           path: ${{ needs.prepare.outputs.node-modules-cache-path }}
 
       - run: yarn run nuxt prepare
+        shell: bash
 
       - run: yarn run coverage
+        shell: bash
