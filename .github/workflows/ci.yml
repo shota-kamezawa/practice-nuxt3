@@ -86,4 +86,4 @@ jobs:
 
   build:
     needs: []
-    uses: ./.github/workflows/reusable/build.yml
+    uses: ./.github/workflows/_build.yml
