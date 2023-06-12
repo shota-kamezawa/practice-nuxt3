@@ -39,7 +39,7 @@ jobs:
         with:
           node-version: ${{ needs.install-dependencies.outputs.node-version }}
 
-      - uses: actions/cache@v3
+      - uses: actions/cache/restore@v3
         with:
           key: ${{ needs.install-dependencies.outputs.node-modules-cache-key }}
           path: ${{ needs.install-dependencies.outputs.node-modules-cache-path }}
