@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  workflow_call: {}
+
+env:
+  NODE_ENV: production
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: setup-node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: .tool-versions
+
+      - id: node-modules-cache-key
+        uses: ./.github/workflows/composite/define-cache-key-for-node-modules
+        with:
+          node-env: ${{ env.NODE_ENV }}
+          node-version: ${{ steps.setup-node.outputs.node-version }}
+
+      - uses: actions/cache@v3
+        with:
+          key: ${{ steps.node-modules-cache-key.outputs.key }}
+          path: ${{ steps.node-modules-cache-key.outputs.path }}
+          restore-keys: ${{ steps.node-modules-cache-key.outputs.restore-keys }}
+
+      - run: yarn install --frozen-lockfile
+        shell: bash
+
+      - run: yarn run nuxt prepare
+        shell: bash
+
+      - run: yarn run build
+        shell: bash
