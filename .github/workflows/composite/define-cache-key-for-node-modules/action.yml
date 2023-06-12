@@ -7,7 +7,7 @@ inputs:
     description: NODE_ENV
     required: true
   node-version:
-    description: Pass output value 'node-version' of 'actions/setup-node'
+    description: Pass node version. For example, 'v18.16.0'
     required: true
 
 outputs:
