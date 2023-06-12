@@ -1,0 +1,42 @@
+name: Composite action for node_modules cache key
+
+description: Define cache key for node_modules directory
+
+inputs:
+  node-env:
+    description: NODE_ENV
+    required: true
+  node-version:
+    description: Pass output value 'node-version' of 'actions/setup-node'
+    required: true
+
+outputs:
+  key:
+    description: For 'key'
+    value: ${{ steps.define-key.outputs.VALUE }}
+  path:
+    description: For 'path'
+    value: node_modules
+  restore-keys:
+    description: For 'restore-keys'
+    value: ${{ steps.define-restore-key.outputs.VALUE }}
+
+runs:
+  using: composite
+
+  steps:
+    - id: define-restore-key
+      run: |
+        NODE_MAJOR=$(echo $NODE_VERSION | cut -f 1 -d .)
+        echo "VALUE=node-modules-${NODE_MAJOR}-${NODE_ENV}-" >> $GITHUB_OUTPUT
+      env:
+        NODE_ENV: ${{ inputs.node-env }}
+        NODE_VERSION: ${{ inputs.node-version }}
+      shell: bash
+
+    - id: define-key
+      run: echo "VALUE=${RESTORE_KEY}${IDENTIFIER}" >> $GITHUB_OUTPUT
+      env:
+        RESTORE_KEY: ${{ steps.define-restore-key.VALUE }}
+        IDENTIFIER: ${{ hashFiles('yarn.lock') }}
+      shell: bash

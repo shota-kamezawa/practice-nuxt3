@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  NODE_ENV: development
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      node-modules-cache-key: ${{ steps.node-modules-cache-key.outputs.key }}
+      node-modules-cache-path: ${{ steps.node-modules-cache-key.outputs.path }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: setup-node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: .tool-versions
+
+      - id: node-modules-cache-key
+        uses: .github/workflows/composite/define-cache-key-for-node-modules/action.yaml
+        with:
+          node-env: ${{ env.NODE_ENV }}
+          node-version: ${{ steps.setup-node.outputs.node-version }}
+
+      - uses: actions/cache@v3
+        with:
+          cache-key: ${{ steps.node-modules-cache-key.outputs.key }}
+          path: ${{ steps.node-modules-cache-key.outputs.path }}
+          restore-keys: ${{ steps.node-modules-cache-key.outputs.restore-keys }}
+
+      - run: yarn install --frozen-lockfile
+        env:
+          NODE_ENV: production
+        shell: bash
+
+  eslint:
+    runs-on: ubuntu-latest
+    needs: [prepare]
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: setup-node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: .tool-versions
+
+      - uses: actions/cache@v3
+        with:
+          key: ${{ needs.prepare.outputs.node-modules-cache-key }}
+          path: ${{ needs.prepare.outputs.node-modules-cache-path }}
+
+      - run: yarn run lint
