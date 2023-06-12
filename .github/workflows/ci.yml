@@ -37,8 +37,6 @@ jobs:
           restore-keys: ${{ steps.node-modules-cache-key.outputs.restore-keys }}
 
       - run: yarn install --frozen-lockfile
-        env:
-          NODE_ENV: production
         shell: bash
 
   eslint:
