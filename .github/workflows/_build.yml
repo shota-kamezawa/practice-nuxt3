@@ -32,8 +32,5 @@ jobs:
       - run: yarn install --frozen-lockfile
         shell: bash
 
-      - run: yarn run nuxt prepare
-        shell: bash
-
       - run: yarn run build
         shell: bash
