@@ -2,6 +2,11 @@ name: Build
 
 on:
   workflow_call:
+    inputs:
+      use-artifact:
+        description: Upload built artifact if true
+        required: true
+        type: boolean
     outputs:
       artifact-name:
         description: Built artifact name
@@ -54,7 +59,8 @@ jobs:
         run: echo "VALUE=.output" >> $GITHUB_OUTPUT
         shell: bash
 
-      - uses: actions/upload-artifact@v3
+      - if: ${{ inputs.use-artifact == true }}
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ steps.define-artifact-name.outputs.VALUE }}
           path: ${{ steps.define-artifact-path.outputs.VALUE }}

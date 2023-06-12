@@ -87,6 +87,8 @@ jobs:
   build:
     needs: []
     uses: ./.github/workflows/_build.yml
+    with:
+      use-artifact: true
 
   check-built-artifact:
     runs-on: ubuntu-latest
