@@ -25,7 +25,7 @@ jobs:
           node-version-file: .tool-versions
 
       - id: node-modules-cache-key
-        uses: .github/workflows/composite/define-cache-key-for-node-modules/action.yaml
+        uses: ./.github/workflows/composite/define-cache-key-for-node-modules/action.yaml
         with:
           node-env: ${{ env.NODE_ENV }}
           node-version: ${{ steps.setup-node.outputs.node-version }}
