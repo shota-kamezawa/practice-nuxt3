@@ -37,6 +37,6 @@ runs:
     - id: define-key
       run: echo "VALUE=${RESTORE_KEY}${IDENTIFIER}" >> $GITHUB_OUTPUT
       env:
-        RESTORE_KEY: ${{ steps.define-restore-key.VALUE }}
+        RESTORE_KEY: ${{ steps.define-restore-key.outputs.VALUE }}
         IDENTIFIER: ${{ hashFiles('yarn.lock') }}
       shell: bash
