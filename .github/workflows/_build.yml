@@ -1,7 +1,14 @@
 name: Build
 
 on:
-  workflow_call: {}
+  workflow_call:
+    outputs:
+      artifact-name:
+        description: Built artifact name
+        value: ${{ jobs.build.outputs.artifact-name }}
+      artifact-path:
+        description: Built artifact path
+        value: ${{ jobs.build.outputs.artifact-path }}
 
 env:
   NODE_ENV: production
@@ -9,6 +16,10 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    needs: []
+    outputs:
+      artifact-name: ${{ steps.define-artifact-name.outputs.VALUE }}
+      artifact-path: ${{ steps.define-artifact-path.outputs.VALUE }}
     steps:
       - uses: actions/checkout@v3
 
@@ -34,3 +45,30 @@ jobs:
 
       - run: yarn run build
         shell: bash
+
+      - id: define-artifact-name
+        run: echo "VALUE=build-${GITHUB_SHA}" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - id: define-artifact-path
+        run: echo "VALUE=.output" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ steps.define-artifact-name.outputs.VALUE }}
+          path: ${{ steps.define-artifact-path.outputs.VALUE }}
+          retention-days: 5
+
+  check-artifact:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: ${{ needs.build.outputs.artifact-name }}
+          path: ${{ needs.build.outputs.artifact-path }}
+
+      - run: ls -a
+        shell: bash
+        working-directory: ${{ needs.build.outputs.artifact-path }}
