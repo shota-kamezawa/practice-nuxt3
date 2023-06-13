@@ -3,6 +3,11 @@ name: Build web app
 on:
   workflow_call:
     inputs:
+      node-env:
+        description: NODE_ENV
+        required: false
+        type: string
+        default: production
       use-artifact:
         description: Upload built artifact if true
         required: true
@@ -16,14 +21,14 @@ on:
         value: ${{ jobs.build.outputs.artifact-path }}
 
 env:
-  NODE_ENV: production
+  NODE_ENV: ${{ inputs.node-env }}
 
 jobs:
   install-dependencies:
     needs: []
     uses: ./.github/workflows/_install-dependencies.yml
     with:
-      node-env: production
+      node-env: ${{ inputs.node-env }}
 
   build:
     needs: [install-dependencies]
