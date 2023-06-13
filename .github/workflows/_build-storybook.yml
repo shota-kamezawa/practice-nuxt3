@@ -68,7 +68,7 @@ jobs:
 
       - id: artifact-name
         name: Define artifact name
-        run: echo "value=storybook-${GITHUB_SHA}" >> $GITHUB_OUTPUT
+        run: echo "value=build-storybook-${GITHUB_SHA}" >> $GITHUB_OUTPUT
 
       - if: ${{ inputs.artifact-retention-days >= 0 }}
         uses: actions/upload-artifact@v3
