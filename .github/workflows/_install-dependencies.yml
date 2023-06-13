@@ -1,32 +1,40 @@
-name: Install dependencies
+name: Install Node.js dependencies
 
 on:
   workflow_call:
     inputs:
+      node-modules-path:
+        description: A path for node_modules directory.
+        type: string
+        required: false
+        default: node_modules
       node-env:
         description: NODE_ENV
-        required: true
         type: string
+        required: true
     outputs:
       node-modules-cache-key:
-        description: For 'key' of actions/cache
-        value: ${{ jobs.install-dependencies.outputs.node-modules-cache-key }}
-      node-modules-cache-path:
-        description: For 'path' of actions/cache
-        value: ${{ jobs.install-dependencies.outputs.node-modules-cache-path }}
+        description: A value to pass to 'key' of actions/cache.
+        value: ${{ jobs.install.outputs.node-modules-cache-key }}
+      node-modules-path:
+        description: A value to pass to 'path' of actions/cache.
+        value: ${{ inputs.node-modules-path }}
       node-version:
-        description: Same as of actions/setup-node
-        value: ${{ jobs.install-dependencies.outputs.node-version }}
+        description: Same as 'node-version' of actions/setup-node.
+        value: ${{ jobs.install.outputs.node-version }}
 
 env:
   NODE_ENV: ${{ inputs.node-env }}
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
-  install-dependencies:
+  install:
     runs-on: ubuntu-latest
     outputs:
       node-modules-cache-key: ${{ steps.cache-key.outputs.value }}
-      node-modules-cache-path: ${{ steps.cache-path.outputs.value }}
       node-version: ${{ steps.setup-node.outputs.node-version }}
     steps:
       - uses: actions/checkout@v3
@@ -42,9 +50,7 @@ jobs:
           NODE_MAJOR=$(echo $NODE_VERSION | cut -f 1 -d .)
           echo "value=node-modules-${NODE_MAJOR}-${NODE_ENV}-" >> $GITHUB_OUTPUT
         env:
-          NODE_ENV: ${{ inputs.node-env }}
           NODE_VERSION: ${{ steps.setup-node.outputs.node-version }}
-        shell: bash
 
       - id: cache-key
         name: Define cache key
@@ -52,18 +58,11 @@ jobs:
         env:
           IDENTIFIER: ${{ hashFiles('yarn.lock') }}
           RESTORE_KEY: ${{ steps.cache-restore-key.outputs.value }}
-        shell: bash
-
-      - id: cache-path
-        name: Define cache path
-        run: echo "value=node_modules" >> $GITHUB_OUTPUT
-        shell: bash
 
       - uses: actions/cache@v3
         with:
           key: ${{ steps.cache-key.outputs.value }}
-          path: ${{ steps.cache-path.outputs.value }}
+          path: ${{ inputs.node-modules-path }}
           restore-keys: ${{ steps.cache-restore-key.outputs.value }}
 
       - run: yarn install --frozen-lockfile
-        shell: bash

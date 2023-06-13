@@ -10,15 +10,19 @@ on:
 env:
   NODE_ENV: development
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
-  install-dependencies:
+  install-dev:
     needs: []
     uses: ./.github/workflows/_install-dependencies.yml
     with:
       node-env: development
 
   eslint:
-    needs: [install-dependencies]
+    needs: [install-dev]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -26,21 +30,19 @@ jobs:
       - id: setup-node
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ needs.install-dependencies.outputs.node-version }}
+          node-version: ${{ needs.install-dev.outputs.node-version }}
 
       - uses: actions/cache/restore@v3
         with:
-          key: ${{ needs.install-dependencies.outputs.node-modules-cache-key }}
-          path: ${{ needs.install-dependencies.outputs.node-modules-cache-path }}
+          key: ${{ needs.install-dev.outputs.node-modules-cache-key }}
+          path: ${{ needs.install-dev.outputs.node-modules-path }}
 
       - run: yarn run postinstall
-        shell: bash
 
       - run: yarn run lint
-        shell: bash
 
   coverage:
-    needs: [install-dependencies]
+    needs: [install-dev]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -48,24 +50,26 @@ jobs:
       - id: setup-node
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ needs.install-dependencies.outputs.node-version }}
+          node-version: ${{ needs.install-dev.outputs.node-version }}
 
       - uses: actions/cache/restore@v3
         with:
-          key: ${{ needs.install-dependencies.outputs.node-modules-cache-key }}
-          path: ${{ needs.install-dependencies.outputs.node-modules-cache-path }}
+          key: ${{ needs.install-dev.outputs.node-modules-cache-key }}
+          path: ${{ needs.install-dev.outputs.node-modules-path }}
 
       - run: yarn run postinstall
-        shell: bash
 
       - run: yarn run coverage
-        shell: bash
 
   build-storybook:
-    needs: [install-dependencies]
+    needs: [install-dev]
     uses: ./.github/workflows/_build-storybook.yml
     with:
-      use-artifact: true
+      artifact-retention-days: 1
+      node-env: development
+      node-modules-cache-key: ${{ needs.install-dev.outputs.node-modules-cache-key }}
+      node-modules-path: ${{ needs.install-dev.outputs.node-modules-path }}
+      node-version: ${{ needs.install-dev.outputs.node-version }}
 
   check-built-storybook:
     needs: [build-storybook]
@@ -77,14 +81,23 @@ jobs:
           path: ${{ needs.build-storybook.outputs.artifact-path }}
 
       - run: ls -a
-        shell: bash
         working-directory: ${{ needs.build-storybook.outputs.artifact-path }}
 
-  build-app:
+  install-prod:
     needs: []
+    uses: ./.github/workflows/_install-dependencies.yml
+    with:
+      node-env: production
+
+  build-app:
+    needs: [install-prod]
     uses: ./.github/workflows/_build-app.yml
     with:
-      use-artifact: true
+      artifact-retention-days: 1
+      node-env: production
+      node-modules-cache-key: ${{ needs.install-prod.outputs.node-modules-cache-key }}
+      node-modules-path: ${{ needs.install-prod.outputs.node-modules-path }}
+      node-version: ${{ needs.install-prod.outputs.node-version }}
 
   check-built-app:
     needs: [build-app]
@@ -96,5 +109,4 @@ jobs:
           path: ${{ needs.build-app.outputs.artifact-path }}
 
       - run: ls -a
-        shell: bash
         working-directory: ${{ needs.build-app.outputs.artifact-path }}

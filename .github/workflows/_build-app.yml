@@ -3,67 +3,74 @@ name: Build web app
 on:
   workflow_call:
     inputs:
+      artifact-retention-days:
+        description: Passed to 'retention-days' of actions/upload-artifact. When less than 0, it means skipping upload.
+        type: number
+        required: false
+        default: -1
+      build-dir:
+        description: Define the directory where built files will be placed.
+        type: string
+        required: false
+        default: .output
       node-env:
         description: NODE_ENV
-        required: false
         type: string
+        required: false
         default: production
-      use-artifact:
-        description: Upload built artifact if true
+      node-modules-cache-key:
+        description: Passed to 'key' of actions/cache/restore for restoring node_modules directory.
+        type: string
         required: true
-        type: boolean
+      node-modules-path:
+        description: Passed to 'path' of actions/cache/restore for restoring node_modules directory.
+        type: string
+        required: true
+      node-version:
+        description: Passed to 'node-version' of actions/setup-node.
+        type: string
+        required: true
     outputs:
       artifact-name:
-        description: For 'name' of actions/download-articaft
+        description: A value to pass to 'name' of actions/download-articaft.
         value: ${{ jobs.build.outputs.artifact-name }}
       artifact-path:
-        description: For 'path' of actions/download-articaft
-        value: ${{ jobs.build.outputs.artifact-path }}
+        description: A value to pass to 'path' of actions/download-articaft.
+        value: ${{ inputs.build-dir }}
 
 env:
-  ARTIFACT_PATH: .output
   NODE_ENV: ${{ inputs.node-env }}
 
-jobs:
-  install-dependencies:
-    needs: []
-    uses: ./.github/workflows/_install-dependencies.yml
-    with:
-      node-env: ${{ inputs.node-env }}
+defaults:
+  run:
+    shell: bash
 
+jobs:
   build:
-    needs: [install-dependencies]
     runs-on: ubuntu-latest
     outputs:
-      artifact-name: ${{ steps.artifact-name.outputs.VALUE }}
-      artifact-path: ${{ steps.artifact-path.outputs.VALUE }}
+      artifact-name: ${{ steps.artifact-name.outputs.value }}
     steps:
       - uses: actions/checkout@v3
 
-      - id: setup-node
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: ${{ needs.install-dependencies.outputs.node-version }}
+          node-version: ${{ inputs.node-version }}
 
       - uses: actions/cache/restore@v3
         with:
-          key: ${{ needs.install-dependencies.outputs.node-modules-cache-key }}
-          path: ${{ needs.install-dependencies.outputs.node-modules-cache-path }}
+          key: ${{ inputs.node-modules-cache-key }}
+          path: ${{ inputs.node-modules-path }}
 
       - run: yarn run build
-        shell: bash
 
       - id: artifact-name
-        run: echo "VALUE=build-${GITHUB_SHA}" >> $GITHUB_OUTPUT
-        shell: bash
+        name: Define artifact name
+        run: echo "value=build-${GITHUB_SHA}" >> $GITHUB_OUTPUT
 
-      - id: artifact-path
-        run: echo "VALUE=${ARTIFACT_PATH}" >> $GITHUB_OUTPUT
-        shell: bash
-
-      - if: ${{ inputs.use-artifact == true }}
+      - if: ${{ inputs.artifact-retention-days >= 0 }}
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ steps.artifact-name.outputs.VALUE }}
-          path: ${{ steps.artifact-path.outputs.VALUE }}
-          retention-days: 5
+          name: ${{ steps.artifact-name.outputs.value }}
+          path: ${{ inputs.build-dir }}
+          retention-days: ${{ inputs.artifact-retention-days }}
