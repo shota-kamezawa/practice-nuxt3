@@ -1,0 +1,72 @@
+name: Build Storybook
+
+on:
+  workflow_call:
+    inputs:
+      node-env:
+        description: NODE_ENV
+        required: false
+        type: string
+        default: development
+      use-artifact:
+        description: Upload built artifact if true
+        required: true
+        type: boolean
+    outputs:
+      artifact-name:
+        description: For 'name' of actions/download-articaft
+        value: ${{ jobs.build.outputs.artifact-name }}
+      artifact-path:
+        description: For 'path' of actions/download-articaft
+        value: ${{ jobs.build.outputs.artifact-path }}
+
+env:
+  ARTIFACT_PATH: storybook-static
+  NODE_ENV: ${{ inputs.node-env }}
+
+jobs:
+  install-dependencies:
+    needs: []
+    uses: ./.github/workflows/_install-dependencies.yml
+    with:
+      node-env: ${{ inputs.node-env }}
+
+  build:
+    needs: [install-dependencies]
+    runs-on: ubuntu-latest
+    outputs:
+      artifact-name: ${{ steps.artifact-name.outputs.VALUE }}
+      artifact-path: ${{ steps.artifact-path.outputs.VALUE }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: setup-node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ needs.install-dependencies.outputs.node-version }}
+
+      - uses: actions/cache/restore@v3
+        with:
+          key: ${{ needs.install-dependencies.outputs.node-modules-cache-key }}
+          path: ${{ needs.install-dependencies.outputs.node-modules-cache-path }}
+
+      - run: yarn run postinstall
+        shell: bash
+
+      - run: yarn run storybook:build
+        shell: bash
+
+      - id: artifact-name
+        run: echo "VALUE=build-${GITHUB_SHA}" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - id: artifact-path
+        run: echo "VALUE=${ARTIFACT_PATH}" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - if: ${{ inputs.use-artifact == true }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ steps.artifact-name.outputs.VALUE }}
+          path: ${{ steps.artifact-path.outputs.VALUE }}
+          retention-days: 5

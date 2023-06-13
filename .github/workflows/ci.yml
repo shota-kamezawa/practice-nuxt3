@@ -61,6 +61,25 @@ jobs:
       - run: yarn run coverage
         shell: bash
 
+  build-storybook:
+    needs: [install-dependencies]
+    uses: ./.github/workflows/_build-storybook.yml
+    with:
+      use-artifact: true
+
+  check-built-storybook:
+    needs: [build-storybook]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: ${{ needs.build-storybook.outputs.artifact-name }}
+          path: ${{ needs.build-storybook.outputs.artifact-path }}
+
+      - run: ls -a
+        shell: bash
+        working-directory: ${{ needs.build-storybook.outputs.artifact-path }}
+
   build-app:
     needs: []
     uses: ./.github/workflows/_build-app.yml
