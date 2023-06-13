@@ -61,21 +61,21 @@ jobs:
       - run: yarn run coverage
         shell: bash
 
-  build:
+  build-app:
     needs: []
-    uses: ./.github/workflows/_build.yml
+    uses: ./.github/workflows/_build-app.yml
     with:
       use-artifact: true
 
-  check-built-artifact:
-    needs: [build]
+  check-built-app:
+    needs: [build-app]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: ${{ needs.build.outputs.artifact-name }}
-          path: ${{ needs.build.outputs.artifact-path }}
+          name: ${{ needs.build-app.outputs.artifact-name }}
+          path: ${{ needs.build-app.outputs.artifact-path }}
 
       - run: ls -a
         shell: bash
-        working-directory: ${{ needs.build.outputs.artifact-path }}
+        working-directory: ${{ needs.build-app.outputs.artifact-path }}

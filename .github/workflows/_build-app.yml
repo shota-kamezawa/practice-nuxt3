@@ -1,4 +1,4 @@
-name: Build
+name: Build web app
 
 on:
   workflow_call:
