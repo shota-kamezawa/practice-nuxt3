@@ -21,6 +21,7 @@ on:
         value: ${{ jobs.build.outputs.artifact-path }}
 
 env:
+  ARTIFACT_PATH: .output
   NODE_ENV: ${{ inputs.node-env }}
 
 jobs:
@@ -57,7 +58,7 @@ jobs:
         shell: bash
 
       - id: artifact-path
-        run: echo "VALUE=.output" >> $GITHUB_OUTPUT
+        run: echo "VALUE=${ARTIFACT_PATH}" >> $GITHUB_OUTPUT
         shell: bash
 
       - if: ${{ inputs.use-artifact == true }}
