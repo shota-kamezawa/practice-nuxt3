@@ -13,7 +13,8 @@
     "postinstall": "nuxt prepare",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "storybook": "storybook dev --port 6006"
+    "storybook": "storybook dev --port 6006",
+    "storybook:build": "storybook build"
   },
   "devDependencies": {
     "@storybook/addon-controls": "^7.0.20",
