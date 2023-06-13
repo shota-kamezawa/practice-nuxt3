@@ -33,7 +33,7 @@ jobs:
           key: ${{ needs.install-dependencies.outputs.node-modules-cache-key }}
           path: ${{ needs.install-dependencies.outputs.node-modules-cache-path }}
 
-      - run: yarn run nuxt prepare
+      - run: yarn run postinstall
         shell: bash
 
       - run: yarn run lint
@@ -55,7 +55,7 @@ jobs:
           key: ${{ needs.install-dependencies.outputs.node-modules-cache-key }}
           path: ${{ needs.install-dependencies.outputs.node-modules-cache-path }}
 
-      - run: yarn run nuxt prepare
+      - run: yarn run postinstall
         shell: bash
 
       - run: yarn run coverage
