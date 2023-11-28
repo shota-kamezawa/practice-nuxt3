@@ -2,33 +2,27 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:js-app",
-    ":timezone(Asia/Tokyo)",
-    ":label(renovate)",
     ":enableVulnerabilityAlertsWithLabel(security)",
-    ":semanticCommits",
+    ":label(renovate)",
     ":prHourlyLimitNone",
+    ":semanticCommits",
+    ":timezone(Asia/Tokyo)",
     "schedule:earlyMondays"
   ],
-  "dependencyDashboardLabels": ["renovate"],
   "automerge": false,
   "platformAutomerge": false,
+  "dependencyDashboardLabels": ["renovate"],
   "lockFileMaintenance": {
     "enabled": true,
     "prBodyDefinitions": {
-      "Age": "age",
-      "Adoption": "",
-      "Passing": "",
+      "Age": null,
+      "Adoption": null,
+      "Passing": null,
       "Confidence": null
     }
   },
   "major": {
     "minimumReleaseAge": "7 days"
-  },
-  "minor": {
-    "minimumReleaseAge": "3 days"
-  },
-  "patch": {
-    "minimumReleaseAge": "2 days"
   },
   "packageRules": [
     {
@@ -39,18 +33,13 @@
         "pin",
         "digest"
       ],
-      "groupName": "All non-major updates",
-      "automerge": false
+      "groupName": "non-major dependencies",
+      "commitMessageAction": "Update"
     },
     {
       "extends": "packages:eslint",
       "matchUpdateTypes": "major",
       "groupName": "eslint"
-    },
-    {
-      "matchPackagePatterns": ["prettier"],
-      "matchUpdateTypes": "major",
-      "groupName": "prettier"
     }
   ]
 }
