@@ -13,7 +13,13 @@
   "automerge": false,
   "platformAutomerge": false,
   "lockFileMaintenance": {
-    "enabled": true
+    "enabled": true,
+    "prBodyDefinitions": {
+      "Age": "age",
+      "Adoption": "",
+      "Passing": "",
+      "Confidence": null
+    }
   },
   "major": {
     "minimumReleaseAge": "7 days"
