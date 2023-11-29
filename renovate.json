@@ -22,9 +22,6 @@
       "Confidence": null
     }
   },
-  "major": {
-    "minimumReleaseAge": "7 days"
-  },
   "packageRules": [
     {
       "matchUpdateTypes": [
