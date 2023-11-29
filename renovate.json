@@ -32,7 +32,7 @@
     }
   },
   "major": {
-    "labels": ["renovate-major"]
+    "labels": ["renovate", "renovate-major"]
   },
   "packageRules": [
     {
@@ -45,7 +45,7 @@
       ],
       "groupName": "non-major dependencies",
       "commitMessageAction": "Update",
-      "labels": ["renovate-minor"]
+      "labels": ["renovate", "renovate-minor"]
     },
     {
       "extends": ["packages:eslint"],
