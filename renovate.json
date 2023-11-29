@@ -19,9 +19,7 @@
       "fileMatch": ["(^|/)app(\\.[^.]+)?\\.ya?ml$"],
       "matchStrings": ["runtime: nodejs(?<currentValue>\\d+)"],
       "depNameTemplate": "node",
-      "datasourceTemplate": "node-version",
-      "versioningTemplate": "node",
-      "extractVersionTemplate": "^v(?<version>\\d+\\.\\d+\\.\\d+)$"
+      "datasourceTemplate": "node-version"
     }
   ],
   "lockFileMaintenance": {
