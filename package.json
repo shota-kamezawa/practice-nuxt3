@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "@pinia/nuxt": "0.4.11",
+    "@types/node": "18.18.2",
     "nuxt": "3.6.1",
     "pinia": "2.1.4",
     "sass": "1.63.6",
