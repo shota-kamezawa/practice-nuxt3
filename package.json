@@ -17,31 +17,31 @@
     "storybook:build": "storybook build"
   },
   "devDependencies": {
-    "@storybook/addon-controls": "7.0.25",
-    "@storybook/client-api": "7.0.25",
-    "@storybook/vue3-vite": "7.0.25",
-    "@typescript-eslint/eslint-plugin": "5.61.0",
-    "@typescript-eslint/parser": "5.61.0",
-    "@vitest/coverage-v8": "0.32.4",
+    "@storybook/addon-controls": "7.6.0",
+    "@storybook/client-api": "7.6.0",
+    "@storybook/vue3-vite": "7.6.0",
+    "@typescript-eslint/eslint-plugin": "5.62.0",
+    "@typescript-eslint/parser": "5.62.0",
+    "@vitest/coverage-v8": "0.34.6",
     "@vue/eslint-config-prettier": "7.1.0",
     "@vue/eslint-config-typescript": "11.0.3",
-    "eslint": "8.44.0",
+    "eslint": "8.54.0",
     "eslint-plugin-prettier": "4.2.1",
-    "eslint-plugin-vue": "9.15.1",
+    "eslint-plugin-vue": "9.18.1",
     "prettier": "2.8.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "storybook": "7.0.25",
-    "vitest": "0.32.4"
+    "storybook": "7.6.0",
+    "vitest": "0.34.6"
   },
   "dependencies": {
-    "@pinia/nuxt": "0.4.11",
-    "@types/node": "18.18.2",
-    "nuxt": "3.6.1",
-    "pinia": "2.1.4",
-    "sass": "1.63.6",
+    "@pinia/nuxt": "0.5.1",
+    "@types/node": "18.18.13",
+    "nuxt": "3.8.2",
+    "pinia": "2.1.7",
+    "sass": "1.69.5",
     "sass-loader": "13.3.2",
-    "typescript": "5.1.6",
-    "vuetify": "3.3.6"
+    "typescript": "5.3.2",
+    "vuetify": "3.4.4"
   }
 }
