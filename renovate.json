@@ -20,7 +20,7 @@
       "matchStrings": [
         "runtime:\\s+(?<depName>[a-zA-Z]+)(?<currentValue>\\d+)"
       ],
-      "datasourceTemplate": "github-releases",
+      "datasourceTemplate": "github-tags",
       "versioningTemplate": "semver"
     }
   ],
