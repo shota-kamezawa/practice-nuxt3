@@ -17,10 +17,11 @@
     {
       "customType": "regex",
       "fileMatch": ["(^|/)app(\\.[^.]+)?\\.ya?ml$"],
-      "matchStrings": ["runtime: nodejs(?<currentValue>\\d+)"],
-      "depNameTemplate": "node",
-      "datasourceTemplate": "node-version",
-      "versioningTemplate": "node"
+      "matchStrings": [
+        "runtime:\\s+(?<depName>[a-zA-Z]+)(?<currentValue>\\d+)"
+      ],
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver"
     }
   ],
   "lockFileMaintenance": {
