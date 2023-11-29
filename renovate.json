@@ -2,7 +2,6 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:js-app",
-    ":enableVulnerabilityAlertsWithLabel(security)",
     ":label(renovate)",
     ":prHourlyLimitNone",
     ":semanticCommits",
@@ -22,6 +21,9 @@
       "datasourceTemplate": "node-version"
     }
   ],
+  "vulnerabilityAlerts": {
+    "addLabels": ["renovate-security"]
+  },
   "lockFileMaintenance": {
     "enabled": true,
     "prBodyDefinitions": {
@@ -33,7 +35,7 @@
   },
   "major": {
     "extends": ["schedule:monthly"],
-    "labels": ["renovate", "renovate-major"]
+    "addLabels": ["renovate-major"]
   },
   "packageRules": [
     {
@@ -46,7 +48,7 @@
       ],
       "groupName": "non-major dependencies",
       "commitMessageAction": "Update",
-      "labels": ["renovate", "renovate-minor"]
+      "addLabels": ["renovate-minor"]
     },
     {
       "extends": ["packages:eslint"],
