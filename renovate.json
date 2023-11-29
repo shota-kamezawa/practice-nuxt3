@@ -24,7 +24,6 @@
   ],
   "lockFileMaintenance": {
     "enabled": true,
-    "extends": ["schedule:monthly"],
     "prBodyDefinitions": {
       "Age": null,
       "Adoption": null,
@@ -33,6 +32,7 @@
     }
   },
   "major": {
+    "extends": ["schedule:monthly"],
     "labels": ["renovate", "renovate-major"]
   },
   "packageRules": [
