@@ -31,6 +31,9 @@
       "Confidence": null
     }
   },
+  "major": {
+    "labels": ["renovate-major"]
+  },
   "packageRules": [
     {
       "matchUpdateTypes": [
@@ -47,8 +50,7 @@
     {
       "extends": ["packages:eslint"],
       "matchUpdateTypes": "major",
-      "groupName": "eslint",
-      "labels": ["renovate-major"]
+      "groupName": "eslint"
     }
   ]
 }
