@@ -2,7 +2,7 @@
   "name": "nuxt-app",
   "private": true,
   "engines": {
-    "node": "^18.0.0"
+    "node": "^20.0.0"
   },
   "scripts": {
     "build": "nuxt build",
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@pinia/nuxt": "0.4.11",
-    "@types/node": "18.18.2",
+    "@types/node": "20.10.0",
     "nuxt": "3.6.1",
     "pinia": "2.1.4",
     "sass": "1.63.6",
