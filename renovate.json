@@ -39,7 +39,7 @@
       "labels": ["renovate-minor"]
     },
     {
-      "extends": "packages:eslint",
+      "extends": ["packages:eslint"],
       "matchUpdateTypes": "major",
       "groupName": "eslint",
       "labels": ["renovate-major"]
