@@ -9,6 +9,7 @@
     ":timezone(Asia/Tokyo)",
     "schedule:earlyMondays"
   ],
+  "configMigration": true,
   "automerge": false,
   "platformAutomerge": false,
   "dependencyDashboardLabels": ["renovate"],
@@ -34,12 +35,14 @@
         "digest"
       ],
       "groupName": "non-major dependencies",
-      "commitMessageAction": "Update"
+      "commitMessageAction": "Update",
+      "labels": ["renovate-minor"]
     },
     {
       "extends": "packages:eslint",
       "matchUpdateTypes": "major",
-      "groupName": "eslint"
+      "groupName": "eslint",
+      "labels": ["renovate-major"]
     }
   ]
 }
