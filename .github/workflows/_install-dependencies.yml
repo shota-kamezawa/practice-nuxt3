@@ -37,7 +37,7 @@ jobs:
       node-modules-cache-key: ${{ steps.cache-key.outputs.value }}
       node-version: ${{ steps.setup-node.outputs.node-version }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - id: setup-node
         uses: actions/setup-node@v3
