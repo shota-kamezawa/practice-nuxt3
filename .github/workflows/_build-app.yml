@@ -57,7 +57,7 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
 
-      - uses: actions/cache/restore@v3
+      - uses: actions/cache/restore@v4
         with:
           key: ${{ inputs.node-modules-cache-key }}
           path: ${{ inputs.node-modules-path }}
