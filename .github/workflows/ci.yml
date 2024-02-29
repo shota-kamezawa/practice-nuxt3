@@ -72,7 +72,7 @@ jobs:
     needs: [build-storybook]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: ${{ needs.build-storybook.outputs.artifact-name }}
           path: ${{ needs.build-storybook.outputs.artifact-path }}
@@ -100,7 +100,7 @@ jobs:
     needs: [build-app]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: ${{ needs.build-app.outputs.artifact-name }}
           path: ${{ needs.build-app.outputs.artifact-path }}

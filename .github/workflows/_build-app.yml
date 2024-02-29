@@ -69,7 +69,7 @@ jobs:
         run: echo "value=build-app-${GITHUB_SHA}" >> $GITHUB_OUTPUT
 
       - if: ${{ inputs.artifact-retention-days >= 0 }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.artifact-name.outputs.value }}
           path: ${{ inputs.build-dir }}
