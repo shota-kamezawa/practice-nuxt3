@@ -8,6 +8,7 @@
     ":timezone(Asia/Tokyo)",
     "schedule:earlyMondays"
   ],
+  "enabled": false,
   "configMigration": true,
   "automerge": false,
   "platformAutomerge": false,
